@@ -2,11 +2,11 @@
 <html>
 
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
 </head>
 <style>
     body, html {
-        margin-left: 0;
+        margin: 0;
         height: 100%;
         display: flex;
         align-items: center;
@@ -16,126 +16,6 @@
 </style>
 
 <body>
-    <script>
-        var config = {
-            type: Phaser.AUTO,
-            width: 1280,
-            height: 704,
-            physics: {
-                default: 'arcade',
-                arcade: {
-                    
-                }
-            },
-            scene: {
-                preload: preload,
-                create: create,
-                update: update
-            }
-        };
-
-        var player;
-        var speed = 200;
-        var cursors;
-        var tiles;
-        var spacing = 64;
-        var xPos = 1, yPos = 1;
-        var width = 20, height = 11;
-        var steps = 40;
-        var boardCount;
-        var board = [
-            ['####################'], //Width = 20, Height = 11
-            ['#..#....#..#.......#'],
-            ['#.......#......##..#'],
-            ['####....#..#....##.#'],
-            ['#..#....#..#.....#.#'],
-            ['#..#....#..#.....#.#'],
-            ['#.......#..#.......#'],
-            ['#..#....#..#.....#.#'],
-            ['#..#.......#.....#.#'],
-            ['#..#....#..#.....#.#'],
-            ['####################']
-        ]
-        var game = new Phaser.Game(config);
-
-        function preload() {
-            this.load.image('player', 'assets/player.png');
-            this.load.image('tile', 'assets/tile.png');
-        }
-
-        function create() {
-            tiles = this.physics.add.staticGroup();
-
-            /*for (let i = 0; i < board.length; i++) {
-                for (let j = 0; j < board[0][0].length; j++) {
-                    if(board[i][0].charAt(j) == "#")
-                    {
-                        tiles.create(spacing*(j+1)-spacing/2, spacing*(i+1)-spacing/2, 'tile');
-                    }
-                }
-            }*/
-            generateMap();
-
-            player = this.physics.add.image(spacing*2-spacing/2, spacing*2-spacing/2, 'player')
-            cursors = this.input.keyboard.createCursorKeys();
-        }
-
-        function generateMap()
-        {
-            tiles.create(spacing*xPos-(spacing/2), spacing*yPos-(spacing/2), 'tile');
-            while(steps > 0)
-            {
-                var dir = Math.floor(Math.random() * 3);
-                switch(dir)
-                {
-                    case 0: //Upp
-                        {
-                            yPos--;
-                            break;
-                        }
-                    case 1: //Höger
-                        {
-                            xPos++;
-                            break;
-                        }
-                    case 2: //Ner
-                        {
-                            yPos++;
-                            break;
-                        }
-                }
-                
-                tiles.create(spacing*xPos-(spacing/2), spacing*yPos-(spacing/2), 'tile');
-                steps--;
-            }
-        }
-
-        function update() {
-            this.cameras.main.pan(player.x, player.y, 100);
-            if(cursors.right.isDown)
-            {
-                player.setVelocityX(speed);
-            }
-            else if(cursors.left.isDown)
-            {
-                player.setVelocityX(-speed);
-            }
-            else {
-                player.setVelocityX(0);
-            }
-            if (cursors.up.isDown) {
-                player.setVelocityY(-speed);
-            } 
-            else if (cursors.down.isDown) {
-                player.setVelocityY(speed);
-            }
-            else {
-                player.setVelocityY(0);
-            }
-
-        }
-
-    </script>
+    <script src="js/main.js"></script>
 </body>
-
 </html>
